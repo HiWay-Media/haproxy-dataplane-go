@@ -42,7 +42,6 @@ type IHaproxyClient interface {
 }
 
 type haproxyClient struct {
-	// url eg: http://10.11.10.25:5555
 	Url  string
 	Rest *resty.Client
 }
