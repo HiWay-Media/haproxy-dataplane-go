@@ -33,6 +33,8 @@ servers, err := client.GetAcls("frontend", "foo")
 
 for other informations refer to the HaProxy Dataplane V2 API spec.
 
+## WORK IN PROGRESS
+
 ------------
 #### license 
 - MIT
