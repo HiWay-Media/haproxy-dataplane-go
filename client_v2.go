@@ -3,9 +3,8 @@ HAPROXY DATAPLANE API CLIENT (V2)
 AUTHOR: Omar Aouini & Allan Nava
 mail: aouini.omar93@gmail.com
 Date: 19/04/2022
-Update: Allan Nava
-*/
-/*
+Update: 21/10/2022
+
 MIT License
 
 Copyright (c) 2022 OmarAouini | Allan Nava

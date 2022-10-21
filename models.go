@@ -1,13 +1,9 @@
 /*
 HAPROXY DATAPLANE API CLIENT (V2)
-AUTHOR: Omar Aouini
+AUTHOR: Omar Aouini | Allan Nava
 mail: aouini.omar93@gmail.com
-Date: 04/19/2022
-*/
-
-
-
-/*
+Date: 19/04/2022
+Update: 21/10/2022
 MIT License
 
 Copyright (c) 2022 OmarAouini
@@ -30,7 +26,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 
 package haproxy
 
