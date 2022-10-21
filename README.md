@@ -1,4 +1,8 @@
 # haproxy-dataplane-go
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/Allan-Nava/haproxy-dataplane-go)](https://goreportcard.com/report/github.com/Allan-Nava/haproxy-dataplane-go)
+[![GoDoc](https://godoc.org/github.com/Allan-Nava/haproxy-dataplane-go?status.svg)](https://godoc.org/github.com/Allan-Nava/haproxy-dataplane-go)
+
 ### go client for HaProxy Dataplane API
 
 ------------
