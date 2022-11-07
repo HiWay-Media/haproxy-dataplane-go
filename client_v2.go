@@ -101,8 +101,14 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 	}
 	url := h.Url + "/v2/services/haproxy/info"
 	var response HaproxyInfo
-	_, err := h.Rest.R().SetResult(&response).Get(url)
+	resp, err := h.Rest.R().SetResult(&response).Get(url)
 	if err != nil {
+		return nil, err
+	}
+	if !string.Contains(resp.Status(), "200") {
+		if h.Debug {
+			log.Println("resp ", resp)
+		}
 		return nil, err
 	}
 	return &response, nil
