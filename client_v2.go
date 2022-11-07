@@ -103,7 +103,7 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 	var response HaproxyInfo
 	_, err := h.Rest.R().SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
