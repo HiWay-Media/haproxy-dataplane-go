@@ -77,18 +77,22 @@ type haproxyClient struct {
 //
 // example usage:
 //
-// client := haproxy.NewHaproxyClient("http://127.0.0.1", "user", "password", false)
-func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPassword string, debug bool) IHaproxyClient {
+// client, error := haproxy.NewHaproxyClient("http://127.0.0.1", "user", "password", false)
+func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPassword string, debug bool) (IHaproxyClient, error) {
 	client := haproxyClient{
 		Url:  haproxyUrl,
 		Rest: resty.New().SetBasicAuth(basicAuthUsername, basicAuthPassword),
 	}
+	haproxyInfo, err := client.GetBasicInfo()
+	if err != nil {
+		return nil, err.(*HaproxyErrorResponse)
+	}
 	if debug {
 		client.Rest.SetDebug(true)
 		client.Debug = true
-		log.Println("Debug mode is enabled for the Haproxy client")
+		log.Println("Debug mode is enabled for the Haproxy client ", haproxyInfo)
 	}
-	return &client
+	return &client, nil
 }
 
 func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
