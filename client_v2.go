@@ -92,6 +92,9 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 }
 
 func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
+	if client.Debug {
+		log.Println("GetBasicInfo called()")
+	}
 	url := h.Url + "/v2/services/haproxy/info"
 	var response HaproxyInfo
 	_, err := h.Rest.R().SetResult(&response).Get(url)
@@ -102,6 +105,9 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 }
 
 func (h *haproxyClient) GetVersion() (*string, error) {
+	if client.Debug {
+		log.Println("GetVersion called()")
+	}
 	url := h.Url + "/v2/services/haproxy/info"
 	var response HaproxyInfo
 	_, err := h.Rest.R().SetResult(&response).Get(url)
@@ -112,6 +118,9 @@ func (h *haproxyClient) GetVersion() (*string, error) {
 }
 
 func (h *haproxyClient) GetSites() (*HaproxySites, error) {
+	if client.Debug {
+		log.Println("GetSites called()")
+	}
 	url := h.Url + "/v2/services/haproxy/sites"
 	var response HaproxySites
 	_, err := h.Rest.R().SetResult(&response).Get(url)
@@ -122,6 +131,9 @@ func (h *haproxyClient) GetSites() (*HaproxySites, error) {
 }
 
 func (h *haproxyClient) GetStats() (*HaproxyStats, error) {
+	if client.Debug {
+		log.Println("GetStats called()")
+	}
 	url := h.Url + "/v2/services/haproxy/sites"
 	var response HaproxyStats
 	_, err := h.Rest.R().SetResult(&response).Get(url)
@@ -132,6 +144,9 @@ func (h *haproxyClient) GetStats() (*HaproxyStats, error) {
 }
 
 func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
+	if client.Debug {
+		log.Println("GetReloads called()")
+	}
 	url := h.Url + "/v2/services/haproxy/reloads"
 	var response HaproxyReloads
 	_, err := h.Rest.R().SetResult(&response).Get(url)
@@ -142,6 +157,9 @@ func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
 }
 
 func (h *haproxyClient) GetTransactions() (*HaproxyTransactions, error) {
+	if client.Debug {
+		log.Println("GetTransactions called()")
+	}
 	url := h.Url + "/v2/services/haproxy/transactions"
 	var response HaproxyTransactions
 	_, err := h.Rest.R().SetResult(&response).Get(url)
