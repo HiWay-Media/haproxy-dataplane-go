@@ -26,7 +26,7 @@ listing, creating, updating and delete haproxy definitions like:
 
 ```go
 // creating a client
-client, err := haproxy.NewClient("127.0.0.1", "user", "password", true)
+client := haproxy.NewHaproxyClient("127.0.0.1", "user", "password", true)
 
 // listing backends
 backends, err := client.GetBackends()
