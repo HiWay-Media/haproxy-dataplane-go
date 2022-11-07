@@ -88,6 +88,9 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 	if err != nil {
 		return nil, err
 	}
+	if haproxyInfo == nil {
+		return nil, errors.New("Could not initialize the haproxyClient")
+	}
 	if debug {
 		client.Rest.SetDebug(true)
 		client.Debug = true
