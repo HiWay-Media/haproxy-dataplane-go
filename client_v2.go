@@ -85,7 +85,7 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 	}
 	haproxyInfo, err := client.GetBasicInfo()
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	if debug {
 		client.Rest.SetDebug(true)
