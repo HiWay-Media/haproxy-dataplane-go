@@ -96,7 +96,7 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 }
 
 func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
-	if client.Debug {
+	if h.Debug {
 		log.Println("GetBasicInfo called()")
 	}
 	url := h.Url + "/v2/services/haproxy/info"
@@ -109,7 +109,7 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 }
 
 func (h *haproxyClient) GetVersion() (*string, error) {
-	if client.Debug {
+	if h.Debug {
 		log.Println("GetVersion called()")
 	}
 	url := h.Url + "/v2/services/haproxy/info"
@@ -122,7 +122,7 @@ func (h *haproxyClient) GetVersion() (*string, error) {
 }
 
 func (h *haproxyClient) GetSites() (*HaproxySites, error) {
-	if client.Debug {
+	if h.Debug {
 		log.Println("GetSites called()")
 	}
 	url := h.Url + "/v2/services/haproxy/sites"
@@ -135,7 +135,7 @@ func (h *haproxyClient) GetSites() (*HaproxySites, error) {
 }
 
 func (h *haproxyClient) GetStats() (*HaproxyStats, error) {
-	if client.Debug {
+	if h.Debug {
 		log.Println("GetStats called()")
 	}
 	url := h.Url + "/v2/services/haproxy/sites"
@@ -148,7 +148,7 @@ func (h *haproxyClient) GetStats() (*HaproxyStats, error) {
 }
 
 func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
-	if client.Debug {
+	if h.Debug {
 		log.Println("GetReloads called()")
 	}
 	url := h.Url + "/v2/services/haproxy/reloads"
@@ -161,7 +161,7 @@ func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
 }
 
 func (h *haproxyClient) GetTransactions() (*HaproxyTransactions, error) {
-	if client.Debug {
+	if h.Debug {
 		log.Println("GetTransactions called()")
 	}
 	url := h.Url + "/v2/services/haproxy/transactions"
@@ -174,6 +174,9 @@ func (h *haproxyClient) GetTransactions() (*HaproxyTransactions, error) {
 }
 
 func (h *haproxyClient) StartTransaction(haproxyVersion string) (*string, error) {
+	if h.Debug {
+		log.Println("StartTransaction called()")
+	}
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/transactions?version=%s", haproxyVersion)
 	var response HaproxyTransaction
 	_, err := h.Rest.R().SetResult(&response).Post(url)
@@ -184,6 +187,9 @@ func (h *haproxyClient) StartTransaction(haproxyVersion string) (*string, error)
 }
 
 func (h *haproxyClient) GetConfigurationGlobal() (*HaproxyConfigurationGlobal, error) {
+	if h.Debug {
+		log.Println("GetConfigurationGlobal called()")
+	}
 	url := h.Url + "/v2/services/haproxy/configuration/global"
 	var response HaproxyConfigurationGlobal
 	_, err := h.Rest.R().SetResult(&response).Get(url)
