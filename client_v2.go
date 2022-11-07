@@ -31,6 +31,7 @@ SOFTWARE.
 package haproxy
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"strings"
