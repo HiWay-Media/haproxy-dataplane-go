@@ -32,6 +32,7 @@ package haproxy
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/go-resty/resty/v2"
 )
@@ -65,13 +66,14 @@ type IHaproxyClient interface {
 }
 
 type haproxyClient struct {
-	Url  string
-	Rest *resty.Client
+	Url   string
+	Rest  *resty.Client
+	Debug bool
 }
 
-//create a new Haproxy client
+// create a new Haproxy client
 //
-//the debug argument is used in case you want to print the request for debug purposes.
+// the debug argument is used in case you want to print the request for debug purposes.
 //
 // example usage:
 //
@@ -83,6 +85,8 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 	}
 	if debug {
 		client.Rest.SetDebug(true)
+		client.Debug = true
+		log.Println("Debug mode is enabled for the Haproxy client")
 	}
 	return &client
 }
@@ -217,7 +221,7 @@ func (h *haproxyClient) GetServers(backend string) (*HaproxyFrontends, error) {
 	return &response, nil
 }
 
-//parent type: backend or frontend
+// parent type: backend or frontend
 func (h *haproxyClient) GetAcls(parentType string, parentName string) (*HaproxyAcls, error) {
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/configuration/acls?parent_type=%s&parent_name=%s", parentType, parentName)
 	var response HaproxyAcls
