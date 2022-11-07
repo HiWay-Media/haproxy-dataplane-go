@@ -33,6 +33,7 @@ package haproxy
 import (
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/go-resty/resty/v2"
 )
@@ -105,7 +106,7 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 	if err != nil {
 		return nil, err
 	}
-	if !string.Contains(resp.Status(), "200") {
+	if !strings.Contains(resp.Status(), "200") {
 		if h.Debug {
 			log.Println("resp ", resp)
 		}
