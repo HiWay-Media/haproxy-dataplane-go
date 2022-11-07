@@ -4,7 +4,7 @@ title: Home
 nav_order: 1
 description: "Haproxy Dataplane Go lang Docs"
 permalink: /
-last_modified_date: 2022-11-07T21:54:08+0000
+last_modified_date: 2022-11-07T15:54:08+0000
 ---
 
 # Haproxy Dataplane Go lang 
@@ -25,7 +25,7 @@ A client library for interacting with the Haproxy Dataplane API V2 for listing, 
 
 ```go
 // creating a client
-client := haproxy.NewHaproxyClient("127.0.0.1", "user", "password", true)
+client, error := haproxy.NewHaproxyClient("http://127.0.0.1", "user", "password", false)
 
 // listing backends
 backends, err := client.GetBackends()
