@@ -189,7 +189,9 @@ func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
 	}
 	url := h.Url + "/v2/services/haproxy/reloads"
 	response := HaproxyReloads{}
-	_, err := h.Rest.R().SetResult(&response).Get(url)
+	_, err := h.Rest.R().
+		SetHeader("Accept", "application/json").
+		SetResult(&response).Get(url)
 	if err != nil {
 		return nil, err.(*HaproxyErrorResponse)
 	}
@@ -268,7 +270,9 @@ func (h *haproxyClient) GetBackends() (*HaproxyBackends, error) {
 func (h *haproxyClient) GetFrontends() (*HaproxyFrontends, error) {
 	url := h.Url + "/v2/services/haproxy/configuration/frontends"
 	response := HaproxyFrontends{}
-	_, err := h.Rest.R().SetResult(&response).Get(url)
+	_, err := h.Rest.R().
+		SetHeader("Accept", "application/json").
+		SetResult(&response).Get(url)
 	if err != nil {
 		return nil, err.(*HaproxyErrorResponse)
 	}
