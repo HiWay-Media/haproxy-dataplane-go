@@ -85,24 +85,24 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 		Url:  haproxyUrl,
 		Rest: resty.New().SetBasicAuth(basicAuthUsername, basicAuthPassword),
 	}
-	haproxyInfo, err := client.GetBasicInfo()
+	if debug {
+		client.Rest.SetDebug(true)
+		client.Debug = true
+		log.Println("Debug mode is enabled for the Haproxy client ")
+	}
+	/*haproxyInfo, err := client.GetBasicInfo()
 	if err != nil {
 		return nil, err
 	}
 	if haproxyInfo == nil {
 		return nil, errors.New("Could not initialize the haproxyClient")
-	}
-	if debug {
-		client.Rest.SetDebug(true)
-		client.Debug = true
-		log.Println("Debug mode is enabled for the Haproxy client ", haproxyInfo)
-	}
+	}*/
 	return &client, nil
 }
 
 func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 	if h.Debug {
-		log.Println("GetBasicInfo called()")
+		log.Println("GetBasicInfo called() ", h.Url)
 	}
 	url := h.Url + "/v2/services/haproxy/info"
 	var response HaproxyInfo
