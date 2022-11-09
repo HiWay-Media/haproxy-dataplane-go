@@ -40,7 +40,8 @@ import (
 
 // the Haproxy client type Interface
 type IHaproxyClient interface {
-	GetBasicInfo() (*HaproxyInfo, error)
+	//GetBasicInfo() (*HaproxyInfo, error)
+	HealthCheck() error
 	GetVersion() (*string, error) // get haproxy version
 	GetSites() (*HaproxySites, error)
 	GetStats() (*HaproxyStats, error)
@@ -98,7 +99,6 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 	}*/
 	return &client, nil
 }
-
 /*func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 	if h.Debug {
 		log.Println("GetBasicInfo called() ", h.Url)
@@ -119,6 +119,7 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 	}
 	return &response, nil
 }*/
+//
 func (h *haproxyClient) HealthCheck() error {
 	if h.Debug {
 		log.Println("GetBasicInfo called() ", h.Url)
