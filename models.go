@@ -231,9 +231,12 @@ type HaproxyFrontends struct {
 	Version int `json:"_version"`
 	Data    []struct {
 		DefaultBackend string `json:"default_backend,omitempty"`
-		Mode           string `json:"mode"`
+		Mode           string `json:"mode,omitempty"`
 		Name           string `json:"name"`
 		Tcplog         bool   `json:"tcplog,omitempty"`
+		Address 	   string `json:"address,omitempty"`
+		Port 	       string `json:"port,omitempty"`
+		Check.         string `json:"check,omitempty"`
 		Forwardfor     struct {
 			Enabled string `json:"enabled"`
 		} `json:"forwardfor,omitempty"`
