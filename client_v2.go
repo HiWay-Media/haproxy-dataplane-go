@@ -99,7 +99,7 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 	return &client, nil
 }
 
-func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
+/*func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 	if h.Debug {
 		log.Println("GetBasicInfo called() ", h.Url)
 	}
@@ -118,6 +118,25 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 		return nil, err
 	}
 	return &response, nil
+}*/
+func (h *haproxyClient) HealthCheck() error {
+	if h.Debug {
+		log.Println("GetBasicInfo called() ", h.Url)
+	}
+	url := h.Url + "/v2/"
+	resp, err := h.Rest.R().
+      SetHeader("Accept", "application/json").
+	  Get(url)
+	if err != nil {
+		return err
+	}
+	if !strings.Contains(resp.Status(), "200") {
+		if h.Debug {
+			log.Println("resp ", resp)
+		}
+		return err
+	}
+	return nil
 }
 
 func (h *haproxyClient) GetVersion() (*string, error) {
