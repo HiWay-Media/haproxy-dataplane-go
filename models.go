@@ -175,8 +175,8 @@ type HaproxyConfigurationDefaults struct {
 			File string `json:"file"`
 		} `json:"error_files"`
 		Balance struct {
-			Algorithm string        `json:"algorithm"`
-			Arguments []interface{} `json:"arguments"`
+			Algorithm string        `json:"algorithm,omitempty"`
+			Arguments []interface{} `json:"arguments,omitempty"`
 		} `json:"balance"`
 		ClientTimeout  int `json:"client_timeout"`
 		ConnectTimeout int `json:"connect_timeout"`
@@ -198,8 +198,8 @@ type HaproxyBackends struct {
 	Version int `json:"_version"`
 	Data    []struct {
 		Balance struct {
-			Algorithm string        `json:"algorithm"`
-			Arguments []interface{} `json:"arguments"`
+			Algorithm string        `json:"algorithm,omitempty"`
+			Arguments []interface{} `json:"arguments,omitempty"`
 		} `json:"balance,omitempty"`
 		Mode       string `json:"mode"`
 		Name       string `json:"name"`

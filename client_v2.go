@@ -104,7 +104,7 @@ func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
 		log.Println("GetBasicInfo called() ", h.Url)
 	}
 	url := h.Url + "/v2/services/haproxy/info"
-	var response HaproxyInfo
+	response := HaproxyInfo{}
 	resp, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -125,7 +125,7 @@ func (h *haproxyClient) GetVersion() (*string, error) {
 		log.Println("GetVersion called()")
 	}
 	url := h.Url + "/v2/services/haproxy/info"
-	var response HaproxyInfo
+	response :=  HaproxyInfo{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -140,7 +140,7 @@ func (h *haproxyClient) GetSites() (*HaproxySites, error) {
 		log.Println("GetSites called()")
 	}
 	url := h.Url + "/v2/services/haproxy/sites"
-	var response HaproxySites
+	response := HaproxySites{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -155,7 +155,7 @@ func (h *haproxyClient) GetStats() (*HaproxyStats, error) {
 		log.Println("GetStats called()")
 	}
 	url := h.Url + "/v2/services/haproxy/sites"
-	var response HaproxyStats
+	response := HaproxyStats{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -170,7 +170,7 @@ func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
 		log.Println("GetReloads called()")
 	}
 	url := h.Url + "/v2/services/haproxy/reloads"
-	var response HaproxyReloads
+	response := HaproxyReloads{}
 	_, err := h.Rest.R().SetResult(&response).Get(url)
 	if err != nil {
 		return nil, err.(*HaproxyErrorResponse)
@@ -183,7 +183,7 @@ func (h *haproxyClient) GetTransactions() (*HaproxyTransactions, error) {
 		log.Println("GetTransactions called()")
 	}
 	url := h.Url + "/v2/services/haproxy/transactions"
-	var response HaproxyTransactions
+	response := HaproxyTransactions{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -198,7 +198,7 @@ func (h *haproxyClient) StartTransaction(haproxyVersion string) (*string, error)
 		log.Println("StartTransaction called()")
 	}
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/transactions?version=%s", haproxyVersion)
-	var response HaproxyTransaction
+	response := HaproxyTransaction{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Post(url)
@@ -213,7 +213,7 @@ func (h *haproxyClient) GetConfigurationGlobal() (*HaproxyConfigurationGlobal, e
 		log.Println("GetConfigurationGlobal called()")
 	}
 	url := h.Url + "/v2/services/haproxy/configuration/global"
-	var response HaproxyConfigurationGlobal
+	response := HaproxyConfigurationGlobal{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -225,8 +225,10 @@ func (h *haproxyClient) GetConfigurationGlobal() (*HaproxyConfigurationGlobal, e
 
 func (h *haproxyClient) GetConfigurationDefaults() (*HaproxyConfigurationDefaults, error) {
 	url := h.Url + "/v2/services/haproxy/configuration/defaults"
-	var response HaproxyConfigurationDefaults
-	_, err := h.Rest.R().SetResult(&response).Get(url)
+	response := HaproxyConfigurationDefaults{}
+	_, err := h.Rest.R().
+      SetHeader("Accept", "application/json").
+	  SetResult(&response).Get(url)
 	if err != nil {
 		return nil, err.(*HaproxyErrorResponse)
 	}
@@ -235,7 +237,7 @@ func (h *haproxyClient) GetConfigurationDefaults() (*HaproxyConfigurationDefault
 
 func (h *haproxyClient) GetBackends() (*HaproxyBackends, error) {
 	url := h.Url + "/v2/services/haproxy/configuration/backends"
-	var response HaproxyBackends
+	response := HaproxyBackends{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -247,7 +249,7 @@ func (h *haproxyClient) GetBackends() (*HaproxyBackends, error) {
 
 func (h *haproxyClient) GetFrontends() (*HaproxyFrontends, error) {
 	url := h.Url + "/v2/services/haproxy/configuration/frontends"
-	var response HaproxyFrontends
+	response := HaproxyFrontends{}
 	_, err := h.Rest.R().SetResult(&response).Get(url)
 	if err != nil {
 		return nil, err.(*HaproxyErrorResponse)
@@ -257,7 +259,7 @@ func (h *haproxyClient) GetFrontends() (*HaproxyFrontends, error) {
 
 func (h *haproxyClient) GetBackendSwitchingRules(frontend string) (*HaproxyBackendSwitchingRules, error) {
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/configuration/backend_switching_rules?frontend=%s", frontend)
-	var response HaproxyBackendSwitchingRules
+	response := HaproxyBackendSwitchingRules{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -269,7 +271,7 @@ func (h *haproxyClient) GetBackendSwitchingRules(frontend string) (*HaproxyBacke
 
 func (h *haproxyClient) GetServers(backend string) (*HaproxyFrontends, error) {
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/configuration/servers?backend=%s", backend)
-	var response HaproxyFrontends
+	response := HaproxyFrontends{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -282,7 +284,7 @@ func (h *haproxyClient) GetServers(backend string) (*HaproxyFrontends, error) {
 // parent type: backend or frontend
 func (h *haproxyClient) GetAcls(parentType string, parentName string) (*HaproxyAcls, error) {
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/configuration/acls?parent_type=%s&parent_name=%s", parentType, parentName)
-	var response HaproxyAcls
+	response := HaproxyAcls{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -294,7 +296,7 @@ func (h *haproxyClient) GetAcls(parentType string, parentName string) (*HaproxyA
 
 func (h *haproxyClient) GetServerSwitchingRules(backend string) (*HaproxyServerSwitchingRules, error) {
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/configuration/server_switching_rules?backend=%s", backend)
-	var response HaproxyServerSwitchingRules
+	response := HaproxyServerSwitchingRules{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
@@ -307,7 +309,7 @@ func (h *haproxyClient) GetServerSwitchingRules(backend string) (*HaproxyServerS
 
 func (h *haproxyClient) GetHttpRequestRules(parentType string, parentName string) (*HaproxyHttpRequestRules, error) {
 	url := h.Url + fmt.Sprintf("/v2/services/haproxy/configuration/http_request_rules?parent_type=%s&parent_name=%s", parentType, parentName)
-	var response HaproxyHttpRequestRules
+	response := HaproxyHttpRequestRules{}
 	_, err := h.Rest.R().
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
