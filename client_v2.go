@@ -31,6 +31,7 @@ SOFTWARE.
 package haproxy
 //
 import (
+	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -90,13 +91,10 @@ func NewHaproxyClient(haproxyUrl string, basicAuthUsername string, basicAuthPass
 		client.Debug = true
 		log.Println("Debug mode is enabled for the Haproxy client ")
 	}
-	/*haproxyInfo, err := client.GetBasicInfo()
+	err := client.HealthCheck()
 	if err != nil {
 		return nil, err
 	}
-	if haproxyInfo == nil {
-		return nil, errors.New("Could not initialize the haproxyClient")
-	}*/
 	return &client, nil
 }
 /*func (h *haproxyClient) GetBasicInfo() (*HaproxyInfo, error) {
@@ -135,7 +133,7 @@ func (h *haproxyClient) HealthCheck() error {
 		if h.Debug {
 			log.Println("resp ", resp)
 		}
-		return err
+		return errors.New("Could not connect haproxy")
 	}
 	return nil
 }
