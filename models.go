@@ -236,7 +236,7 @@ type HaproxyFrontends struct {
 		Tcplog         bool   `json:"tcplog,omitempty"`
 		Address 	   string `json:"address,omitempty"`
 		Port 	       string `json:"port,omitempty"`
-		Check.         string `json:"check,omitempty"`
+		Check          string `json:"check,omitempty"`
 		Forwardfor     struct {
 			Enabled string `json:"enabled"`
 		} `json:"forwardfor,omitempty"`
