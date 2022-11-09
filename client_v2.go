@@ -178,7 +178,7 @@ func (h *haproxyClient) GetStats() (*HaproxyStats, error) {
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
@@ -193,7 +193,7 @@ func (h *haproxyClient) GetReloads() (*HaproxyReloads, error) {
 		SetHeader("Accept", "application/json").
 		SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
@@ -208,7 +208,7 @@ func (h *haproxyClient) GetTransactions() (*HaproxyTransactions, error) {
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
@@ -223,7 +223,7 @@ func (h *haproxyClient) StartTransaction(haproxyVersion string) (*string, error)
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Post(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response.ID, nil
 }
@@ -238,7 +238,7 @@ func (h *haproxyClient) GetConfigurationGlobal() (*HaproxyConfigurationGlobal, e
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
@@ -250,7 +250,7 @@ func (h *haproxyClient) GetConfigurationDefaults() (*HaproxyConfigurationDefault
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
@@ -262,7 +262,8 @@ func (h *haproxyClient) GetBackends() (*HaproxyBackends, error) {
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
+		//.(*HaproxyErrorResponse)
 	}
 	return &response, nil
 }
@@ -274,7 +275,8 @@ func (h *haproxyClient) GetFrontends() (*HaproxyFrontends, error) {
 		SetHeader("Accept", "application/json").
 		SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
+		//.(*HaproxyErrorResponse)
 	}
 	return &response, nil
 }
@@ -286,7 +288,8 @@ func (h *haproxyClient) GetBackendSwitchingRules(frontend string) (*HaproxyBacke
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
+		//.(*HaproxyErrorResponse)
 	}
 	return &response, nil
 }
@@ -298,7 +301,8 @@ func (h *haproxyClient) GetServers(backend string) (*HaproxyFrontends, error) {
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
+		//.(*HaproxyErrorResponse)
 	}
 	return &response, nil
 }
@@ -311,7 +315,7 @@ func (h *haproxyClient) GetAcls(parentType string, parentName string) (*HaproxyA
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 	return &response, nil
 }
@@ -323,7 +327,7 @@ func (h *haproxyClient) GetServerSwitchingRules(backend string) (*HaproxyServerS
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 
 	return &response, nil
@@ -336,7 +340,7 @@ func (h *haproxyClient) GetHttpRequestRules(parentType string, parentName string
       SetHeader("Accept", "application/json").
 	  SetResult(&response).Get(url)
 	if err != nil {
-		return nil, err.(*HaproxyErrorResponse)
+		return nil, err
 	}
 
 	return &response, nil
@@ -348,7 +352,7 @@ func (h *haproxyClient) AddFrontend(transactionId string, addFrontend *HaproxyAd
       SetHeader("Accept", "application/json").
 	  SetResult(&HaproxyAddFrontend{}).SetBody(addFrontend).Post(url)
 	if err != nil {
-		return err.(*HaproxyErrorResponse)
+		return err
 	}
 
 	return nil
@@ -360,7 +364,7 @@ func (h *haproxyClient) AddBackend(transactionId string, addBackend *HaproxyAddB
       SetHeader("Accept", "application/json").
 	  SetResult(&HaproxyAddBackend{}).SetBody(addBackend).Post(url)
 	if err != nil {
-		return err.(*HaproxyErrorResponse)
+		return err
 	}
 
 	return nil
@@ -372,7 +376,7 @@ func (h *haproxyClient) AddAcl(parenttype string, parentName string, transaction
       SetHeader("Accept", "application/json").
 	  SetResult(&HaproxyAddAcl{}).SetBody(addAcl).Post(url)
 	if err != nil {
-		return err.(*HaproxyErrorResponse)
+		return err
 	}
 
 	return nil
@@ -384,7 +388,7 @@ func (h *haproxyClient) AddServer(backend string, transactionId string, addServe
       SetHeader("Accept", "application/json").
 	  SetResult(&HaproxyAddServer{}).SetBody(addServer).Post(url)
 	if err != nil {
-		return err.(*HaproxyErrorResponse)
+		return err
 	}
 
 	return nil
@@ -396,7 +400,7 @@ func (h *haproxyClient) AddHttpRequestRule(parentType string, parentName string,
       SetHeader("Accept", "application/json").
 	  SetResult(&HaproxyAddHttpRequestRule{}).SetBody(addRule).Post(url)
 	if err != nil {
-		return err.(*HaproxyErrorResponse)
+		return err
 	}
 
 	return nil
@@ -408,7 +412,7 @@ func (h *haproxyClient) AddBackendSwitchingRule(frontend string, transactionId s
       SetHeader("Accept", "application/json").
 	  SetResult(&HaproxyAddBackendSwitchingRule{}).SetBody(addRule).Post(url)
 	if err != nil {
-		return err.(*HaproxyErrorResponse)
+		return err
 	}
 
 	return nil
